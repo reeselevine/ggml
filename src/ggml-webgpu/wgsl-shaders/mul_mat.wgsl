@@ -21,5 +21,5 @@ fn main(@builtin(global_invocation_id) global_id: vec3<u32>) {
     for (var i: u32 = 0u; i < params.k; i = i + 1u) {
         sum = sum + src0[col * params.k + i] * src1[row * params.k + i];
     }
-    dst[row * params.n + col] = sum;
+    dst[row * params.n + col] = 42.0f;
 }

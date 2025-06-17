@@ -117,9 +117,12 @@ static void ggml_webgpu_create_buffer(wgpu::Device &device, wgpu::Buffer &buffer
     wgpu::BufferDescriptor buffer_desc;
     buffer_desc.size = size;
     buffer_desc.usage = usage;
-    buffer_desc.mappedAtCreation = false; 
+    //buffer_desc.mappedAtCreation = true; 
     // TODO: error handling
     buffer = device.CreateBuffer(&buffer_desc);
+    //float * data = (float *) buffer.GetMappedRange();
+    //data[0] = 42.0;
+    //buffer.Unmap();
 }
 
 /** End WebGPU object initializations */
@@ -396,6 +399,8 @@ static void ggml_backend_webgpu_buffer_get_tensor(ggml_backend_buffer_t buffer, 
     // Map the staging buffer to read the data
     ggml_backend_webgpu_map_buffer(webgpu_ctx, webgpu_ctx->get_tensor_staging_buf, wgpu::MapMode::Read, 0, size);
     const void * mapped_range = webgpu_ctx->get_tensor_staging_buf.GetConstMappedRange();
+    const float * mapped_data = (const float *) mapped_range;
+    WEBGPU_LOG_DEBUG("ggml_backend_webgpu_buffer_get_tensor: first element: " << mapped_data[0]);
 
     // Copy the data from the mapped range to the output buffer
     std::memcpy(data, mapped_range, size);
