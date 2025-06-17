@@ -67,7 +67,7 @@ First, build and install Dawn and its embdawnwebgpu package, following the instr
 Then, set up an Emscripten build:
 
 ```
-emcmake cmake -B wasm-build -DGGML_WEBGPU=ON -DGGML_WEBGPU_DEBUG=ON -DGGML_METAL=OFF -DEMSCRIPTEN_SYSTEM_PROCESSOR=wasm -DGGML_BUILD_TESTS=OFF -DEMDAWNWEBGPU_DIR=/path/to/emdawnwebgpu_pkg
+emcmake cmake -B wasm-build -DGGML_WEBGPU=ON -DGGML_WEBGPU_DEBUG=ON -DGGML_METAL=OFF -DGGML_BUILD_TESTS=OFF -DEMDAWNWEBGPU_DIR=/path/to/emdawnwebgpu_pkg
 cmake cmake --build wasm-build --config Release
 ```
 
