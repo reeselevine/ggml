@@ -22,6 +22,7 @@ cp -rpv ../llama.cpp/ggml/src/ggml-opencl/*    src/ggml-opencl/
 cp -rpv ../llama.cpp/ggml/src/ggml-rpc/*       src/ggml-rpc/
 cp -rpv ../llama.cpp/ggml/src/ggml-sycl/*      src/ggml-sycl/
 cp -rpv ../llama.cpp/ggml/src/ggml-vulkan/*    src/ggml-vulkan/
+cp -rpv ../llama.cpp/ggml/src/ggml-webgpu/*    src/ggml-webgpu/
 
 cp -rpv ../llama.cpp/ggml/include/ggml*.h include/
 cp -rpv ../llama.cpp/ggml/include/gguf*.h include/

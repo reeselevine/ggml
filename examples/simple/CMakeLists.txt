@@ -19,3 +19,12 @@ endif()
 if (GGML_METAL)
     add_compile_definitions(GGML_USE_METAL)
 endif()
+
+if (GGML_WEBGPU)
+    add_compile_definitions(GGML_USE_WEBGPU)
+    if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+        set_target_properties(simple-backend PROPERTIES COMPILE_FLAGS "--use-port=${EMDAWNWEBGPU_DIR}/emdawnwebgpu.port.py")
+        set_target_properties(simple-backend PROPERTIES LINK_FLAGS "--use-port=${EMDAWNWEBGPU_DIR}/emdawnwebgpu.port.py -sASYNCIFY=1")
+    endif()
+endif()
+

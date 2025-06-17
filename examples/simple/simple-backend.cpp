@@ -11,6 +11,10 @@
 #include "ggml-metal.h"
 #endif
 
+#ifdef GGML_USE_WEBGPU
+#include "ggml-webgpu.h"
+#endif
+
 #include <cassert>
 #include <cmath>
 #include <cstdio>
@@ -62,6 +66,15 @@ void load_model(simple_model & model, float * a, float * b, int rows_A, int cols
         fprintf(stderr, "%s: ggml_backend_metal_init() failed\n", __func__);
     }
 #endif
+
+#ifdef GGML_USE_WEBGPU
+    fprintf(stderr, "%s: using WebGPU backend\n", __func__);
+    model.backend = ggml_backend_webgpu_init();
+    if (!model.backend) {
+        fprintf(stderr, "%s: ggml_backend_webgpu_init() failed\n", __func__);
+    }
+#endif
+
 
     // if there aren't GPU Backends fallback to CPU backend
     if (!model.backend) {
