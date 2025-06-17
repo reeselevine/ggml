@@ -59,3 +59,22 @@ ggml\\_mul\\_mat(
 $$
 
 The `simple-ctx` doesn't support gpu acceleration. `simple-backend` demonstrates how to use other backends like CUDA and Metal.
+
+## Simple Backend WebGPU Emscripten [In Progress]
+
+First, build and install Dawn and its embdawnwebgpu package, following the instructions [here](https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/quickstart-cmake.md) and [here](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/emdawnwebgpu/).
+
+Then, set up an Emscripten build:
+
+```
+emcmake cmake -B wasm-build -DGGML_WEBGPU=ON -DGGML_WEBGPU_DEBUG=ON -DGGML_METAL=OFF -DEMSCRIPTEN_SYSTEM_PROCESSOR=wasm -DGGML_BUILD_TESTS=OFF -DEMDAWNWEBGPU_DIR=/path/to/emdawnwebgpu_pkg
+cmake cmake --build wasm-build --config Release
+```
+
+From the ggml root directory, start an http server using the emscripten [emrun](https://emscripten.org/docs/compiling/Running-html-files-with-emrun.html) tool:
+
+```
+emrun --no_browser --port 8080 .
+```
+
+In your browser, navigate to `http://localhost:8080/examples/simple/index.html`, and inspect the console for logs.
