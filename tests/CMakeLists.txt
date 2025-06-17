@@ -35,8 +35,6 @@ elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "ppc64le" OR ${CMAKE_SYSTEM_PROCESSOR}
 elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "loongarch64")
     message(STATUS "loongarch64 detected")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mlsx -mlasx")
-elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "wasm")
-    message(STATUS "wasm detected")
 else()
     message(STATUS "x86 detected")
     #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mavx -mavx2 -mfma -mf16c")
